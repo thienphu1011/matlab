@@ -1,0 +1,9 @@
+A = [1 4; 3 2]
+B = [2 1 3; 1 5 6; 3 6 0]
+C = [3 2 5; 4 1 2]
+result1 = 3 * A
+result2 = A * C
+% Other matrix multiplications that can be performed:
+% A * A
+% B * B
+% C * B
