@@ -1,0 +1,2 @@
+%You need a legend whenever you plot multiple data series on the same graph.
+%It acts as a visual key (using colors, markers, or line styles) so the viewer knows exactly which line represents which specific set of data.
