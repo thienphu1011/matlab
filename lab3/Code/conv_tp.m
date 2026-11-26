@@ -1,9 +1,12 @@
 function [y, H] = conv_tp(h, x)
 h = h(:);
 x = x(:);
+Nh = length(h);
 Nx = length(x);
-c = [h; zeros(Nx - 1, 1)];
-r = [h(1), zeros(1, Nx - 1)];
-H = toeplitz(c, r);
+Ny = Nh + Nx - 1;
+H = zeros(Ny, Nx);
+for j = 1:Nx
+    H(j : j + Nh - 1, j) = h;
+end
 y = H * x;
 end
