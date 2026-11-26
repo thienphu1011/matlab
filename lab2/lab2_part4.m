@@ -1,4 +1,4 @@
-%% EE 341 - Lab 2: Part 4.4 - 2x Image Expansion (Bilinear Interpolation)
+
 function out = lab2_expand(filename)
     if nargin < 1
         filename = 'DailyShow.jpg';

@@ -13,7 +13,7 @@ function [img_sub, img_avg] = lab2_part2(S_list)
     img_gray = rgb2gray(imread('DailyShow.jpg'));
     [N, M] = size(img_gray);
 
-   
+  
     figure('Name', 'Lab 2 - Part 4.2: Spatial Scaling (S = 2 & S = 5)', ...
            'Color', 'w', 'WindowState', 'maximized');
 
@@ -75,7 +75,6 @@ function [img_sub, img_avg] = scale_by_factor(img_gray, S)
     img_sub = zeros(newN, newM, 'uint8');
     img_avg = zeros(newN, newM, 'uint8');
 
-    
     offset = ceil(S / 2);
 
     for i = 1:newN
@@ -86,10 +85,8 @@ function [img_sub, img_avg] = scale_by_factor(img_gray, S)
             c_end   = j * S;
 
             block = img_gray(r_start:r_end, c_start:c_end);
-
           
             img_sub(i, j) = block(offset, offset);
-
           
             img_avg(i, j) = uint8(round(mean(double(block(:)))));
         end
