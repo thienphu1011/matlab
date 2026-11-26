@@ -22,9 +22,9 @@ disp('Direct terms k:');
 disp(k);
 
 n = -10:30;
-y_z = zeros(size(n));
+y = zeros(size(n));
 for m = 1:length(k)
-    y_z = y_z + k(m) * double(n == m - 1);
+    y = y + k(m) * double(n == m - 1);
 end
 
 mult = 1;
@@ -36,41 +36,18 @@ for i = 1:length(p)
     end
     if abs(p(i)) < 1
         if mult == 1
-            y_z = y_z + r(i) * (p(i) .^ n) .* double(n >= 0);
+            y = y + r(i) * (p(i) .^ n) .* double(n >= 0);
         else
-            y_z = y_z + r(i) * (n + 1) .* (p(i) .^ n) .* double(n >= 0);
+            y = y + r(i) * (n + 1) .* (p(i) .^ n) .* double(n >= 0);
         end
     else
-        y_z = y_z - r(i) * (p(i) .^ n) .* double(n <= -1);
+        y = y - r(i) * (p(i) .^ n) .* double(n <= -1);
     end
 end
-y_z = real(y_z);
-
-k_idx = 0:100;
-xk = (k_idx - 2) .* (0.5 .^ (k_idx - 2)) .* cos(pi * (k_idx - 2) / 3) .* double(k_idx >= 2);
-y_direct = zeros(size(n));
-for idx = 1:length(n)
-    m = n(idx) - k_idx;
-    hm = zeros(size(m));
-    pos = m >= 0;
-    neg = m <= -1;
-    hm(pos) = (1/3) .^ m(pos);
-    hm(neg) = (1/2) .^ (-m(neg));
-    y_direct(idx) = sum(xk .* hm);
-end
-
-disp('Max absolute error between Inverse Z-Transform and direct convolution:');
-disp(max(abs(y_z - y_direct)));
+y = real(y);
 
 figure('Name', 'Exercise 4.3 - Inverse Z-Transform', 'Color', 'w');
-subplot(2, 1, 1);
-stem(n, y_z, 'filled');
-title('y(n) via Z-Transform & residuez (ROC: 0.5 < |z| < 2)');
-subtitle(names_tag);
-xlabel('n'); ylabel('y(n)'); grid on;
-
-subplot(2, 1, 2);
-stem(n, y_direct, 'filled');
-title('y(n) via Direct Linear Convolution (Verification)');
+stem(n, y, 'filled');
+title('y(n) = x(n) * h(n) via Z-Transform & residuez');
 subtitle(names_tag);
 xlabel('n'); ylabel('y(n)'); grid on;
